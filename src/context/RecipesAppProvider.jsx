@@ -3,8 +3,13 @@ import PropTypes from 'prop-types';
 import RecipesAppContext from './RecipesAppContext';
 
 function RecipesAppProvider({ children }) {
-  const contextValue = {};
-  return <RecipesAppContext value={ contextValue }>{children}</RecipesAppContext>;
+  return (
+    <RecipesAppContext.Provider
+      value="contextValue"
+    >
+      {children}
+    </RecipesAppContext.Provider>
+  );
 }
 
 RecipesAppProvider.propTypes = {
