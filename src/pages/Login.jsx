@@ -47,6 +47,7 @@ function Login({ history }) {
           onChange={ (e) => setEmail(e.target.value) }
         />
       </label>
+
       <label htmlFor="password-input">
         Senha
         <input
@@ -56,6 +57,7 @@ function Login({ history }) {
           onChange={ (e) => setPassword(e.target.value) }
         />
       </label>
+
       <button
         type="submit"
         data-testid="login-submit-btn"
