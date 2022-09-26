@@ -7,6 +7,7 @@ import Login from './pages/Login';
 import Meals from './pages/Meals';
 import Drinks from './pages/Drinks';
 import Profile from './pages/Profile';
+import './styles/footer.css';
 import RecipesFoodDetails from './pages/RecipesFoodDetails';
 import RecipesInProgress from './pages/RecipesInProgress';
 import RecipesCompleted from './pages/RecipesCompleted';
