@@ -17,12 +17,12 @@ export default function SearchBar({ title }) {
   const handleChange = (value, func) => func(value);
 
   const fetchFilter = async () => {
-    if (search.length > 1 && filter === 'f') {
-      global.alert('Your search must have only 1 (one) character');
+    const response = await fetchSearch(search, filter, title);
+    if (response[title.toLowerCase()] === null) {
+      global.alert('Sorry, we haven\'t found any recipes for these filters.');
       return null;
     }
 
-    const response = await fetchSearch(search, filter, title);
     if (response[title.toLowerCase()].length === 1) {
       const id = response[title.toLowerCase()][0][`id${title.replace('s', '')}`];
       history.push(`/${title.toLowerCase()}/${id}`);
@@ -30,10 +30,17 @@ export default function SearchBar({ title }) {
     setSearchAnswer(response);
   };
 
-  const handleSubmit = (event) => [
-    event.preventDefault(),
-    fetchFilter(),
-  ];
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    if (search.length > 1 && filter === 'f') {
+      global.alert('Your search must have only 1 (one) character.');
+      return null;
+    }
+
+    fetchFilter();
+  };
+
   return (
     <form onSubmit={ handleSubmit }>
       <input
