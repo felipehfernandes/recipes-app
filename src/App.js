@@ -10,10 +10,8 @@ import Meals from './pages/Meals';
 import Drinks from './pages/Drinks';
 import Profile from './pages/Profile';
 
-import MealRecipe from './pages/MealRecipe';
-import MealInProgress from './pages/MealInProgress';
-import DrinkRecipe from './pages/DrinkRecipe';
-import DrinkInProgress from './pages/DrinkInProgress';
+import RecipeDetails from './pages/RecipeDetails';
+import RecipeInProgress from './pages/RecipeInProgress';
 
 import Complete from './pages/Complete';
 import Favorites from './pages/Favorites';
@@ -25,10 +23,10 @@ function App() {
         <Route exact path="/" component={ Login } />
         <Route exact path="/meals" component={ Meals } />
         <Route exact path="/drinks" component={ Drinks } />
-        <Route exact path="/meals/:id" component={ MealRecipe } />
-        <Route exact path="/drinks/id" component={ DrinkRecipe } />
-        <Route exact path="/meals/:id/in-progress" component={ MealInProgress } />
-        <Route exact path="/drinks/:id/in-progress" component={ DrinkInProgress } />
+        <Route exact path="/meals/:id" component={ RecipeDetails } />
+        <Route exact path="/drinks/id" component={ RecipeDetails } />
+        <Route exact path="/meals/:id/in-progress" component={ RecipeInProgress } />
+        <Route exact path="/drinks/:id/in-progress" component={ RecipeInProgress } />
         <Route exact path="/profile" component={ Profile } />
         <Route exact path="/done-recipes" component={ Complete } />
         <Route exact path="/favorite-recipes" component={ Favorites } />

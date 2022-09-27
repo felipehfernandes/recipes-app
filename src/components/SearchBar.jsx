@@ -18,11 +18,11 @@ export default function SearchBar({ title }) {
 
   const fetchFilter = async () => {
     const response = await fetchSearch(search, filter, title);
+
     if (response[title.toLowerCase()] === null) {
       global.alert('Sorry, we haven\'t found any recipes for these filters.');
       return null;
     }
-
     if (response[title.toLowerCase()].length === 1) {
       const id = response[title.toLowerCase()][0][`id${title.replace('s', '')}`];
       history.push(`/${title.toLowerCase()}/${id}`);
@@ -34,7 +34,7 @@ export default function SearchBar({ title }) {
     event.preventDefault();
 
     if (search.length > 1 && filter === 'f') {
-      global.alert('Your search must have only 1 (one) character.');
+      global.alert('Your search must have only 1 (one) character');
       return null;
     }
 

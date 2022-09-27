@@ -36,3 +36,12 @@ export const fetchForEachCategory = async (category, title) => {
   const data = await response.json();
   return data;
 };
+
+export const fetchByID = async (id, title) => {
+  const search = title === 'Meals' ? 'meal' : 'cocktail';
+
+  const endpoint = `https://www.the${search}db.com/api/json/v1/1/lookup.php?i=${id}`;
+  const response = await fetch(endpoint);
+  const data = await response.json();
+  return data;
+};

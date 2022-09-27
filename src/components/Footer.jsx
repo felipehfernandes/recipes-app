@@ -2,6 +2,8 @@ import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import propTypes from 'prop-types';
 
+import '../styles/footer.css';
+
 import RecipesAppContext from '../context/RecipesAppContext';
 
 import drinkIcon from '../images/drinkIcon.svg';
