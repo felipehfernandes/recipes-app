@@ -3,11 +3,11 @@ import propTypes from 'prop-types';
 
 import RecipesAppContext from '../context/RecipesAppContext';
 
-import Card from './Card';
+import Card from './RecipeCard';
 
 const cardsLimitPerPage = 12;
 
-export default function List({ title }) {
+export default function Recipes({ title }) {
   const [recipes, setRecipes] = useState([]);
 
   const { searchAnswer } = useContext(RecipesAppContext);
@@ -38,6 +38,6 @@ export default function List({ title }) {
   );
 }
 
-List.propTypes = {
+Recipes.propTypes = {
   title: propTypes.string.isRequired,
 };

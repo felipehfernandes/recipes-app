@@ -7,9 +7,12 @@ function RecipesAppProvider({ children }) {
     meals: [],
     drinks: [],
   });
+  const [categories, setCategories] = useState([]);
 
   const context = {
     searchAnswer,
+    categories,
+    setCategories,
     setSearchAnswer,
   };
 
