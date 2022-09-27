@@ -6,8 +6,8 @@ import Footer from '../components/Footer';
 function Profile() {
   return (
     <div>
-      <Header pageTitle="Profile" searchBtn={ false } />
-      <Footer />
+      <Header title="Profile" />
+      <Footer title="Profile" />
     </div>
   );
 }
