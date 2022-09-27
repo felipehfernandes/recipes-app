@@ -21,9 +21,19 @@ const saveDoneRecipes = (key) => {
   return doneRecipes;
 };
 
+const saveInProgressRecipes = () => {
+  if (!JSON.parse(localStorage.getItem('inProgressRecipes'))) {
+    localStorage.setItem('inProgressRecipes', JSON.stringify({ meals: {}, drinks: {} }));
+  }
+
+  const inProgressRecipes = readSpecificKey('inProgressRecipes');
+  return inProgressRecipes;
+};
+
 export {
   saveEmail,
   saveMealsToken,
   saveDrinksToken,
   saveDoneRecipes,
+  saveInProgressRecipes,
 };

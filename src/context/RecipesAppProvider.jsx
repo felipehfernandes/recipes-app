@@ -8,12 +8,15 @@ function RecipesAppProvider({ children }) {
     drinks: [],
   });
   const [categories, setCategories] = useState([]);
+  const [recipesInProgress, setRecipesInProgress] = useState([]);
 
   const context = {
     searchAnswer,
     categories,
+    recipesInProgress,
     setCategories,
     setSearchAnswer,
+    setRecipesInProgress,
   };
 
   return (
