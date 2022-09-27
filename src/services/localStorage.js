@@ -10,4 +10,20 @@ const saveDrinksToken = (token) => {
   localStorage.setItem('drinksToken', token);
 };
 
-export { saveEmail, saveMealsToken, saveDrinksToken };
+const readSpecificKey = (key) => JSON.parse(localStorage.getItem(key));
+
+const saveDoneRecipes = (key) => {
+  if (!JSON.parse(localStorage.getItem(key))) {
+    localStorage.setItem(key, JSON.stringify([]));
+  }
+
+  const doneRecipes = readSpecificKey(key);
+  return doneRecipes;
+};
+
+export {
+  saveEmail,
+  saveMealsToken,
+  saveDrinksToken,
+  saveDoneRecipes,
+};
