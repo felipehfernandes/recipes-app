@@ -30,6 +30,7 @@ export default function Recipes({ title }) {
               recipe={ recipe }
               index={ index }
               title={ title }
+              type="recipes"
             />
           );
         })
