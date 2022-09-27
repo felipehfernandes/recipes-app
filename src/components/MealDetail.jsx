@@ -59,6 +59,15 @@ export default function DrinkDetail({ id }) {
           { recipe?.strInstructions }
         </p>
       </fieldset>
+      <iframe
+        data-testid="video"
+        src={ recipe?.strYoutube?.replace('watch', 'embed') }
+        title="video"
+        width="420"
+        height="315"
+      >
+        Youtube Video
+      </iframe>
     </div>
   );
 }
