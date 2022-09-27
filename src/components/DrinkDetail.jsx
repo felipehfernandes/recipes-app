@@ -1,17 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import propTypes from 'prop-types';
 
-import { fetchByID } from '../services/API';
+import Recommendations from './Recommendations';
+
+import { fetchByID, fetchByIngredients } from '../services/API';
 
 export default function DrinkDetail({ id }) {
   const [ingredients, setIngredients] = useState([]);
   const [recipe, setRecipe] = useState([]);
   const [measures, setMeasures] = useState([]);
+  const [recommendations, setRecommendations] = useState([]);
 
   useEffect(() => {
     const fetch = async () => {
       const { drinks } = await fetchByID(id, 'Drinks');
       setRecipe(drinks[0]);
+    };
+    fetch();
+  }, []);
+
+  useEffect(() => {
+    const fetch = async () => {
+      const { meals } = await fetchByIngredients('Meals');
+      setRecommendations(meals);
     };
     fetch();
   }, []);
@@ -59,6 +70,14 @@ export default function DrinkDetail({ id }) {
           { recipe?.strInstructions }
         </p>
       </fieldset>
+      {
+        recommendations.length > 0 && (
+          <Recommendations
+            recommendations={ recommendations }
+            title="Meals"
+          />
+        )
+      }
     </div>
   );
 }

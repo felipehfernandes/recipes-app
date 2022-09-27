@@ -1,17 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import propTypes from 'prop-types';
 
-import { fetchByID } from '../services/API';
+import { fetchByID, fetchByIngredients } from '../services/API';
+
+import Recommendations from './Recommendations';
 
 export default function DrinkDetail({ id }) {
   const [ingredients, setIngredients] = useState([]);
   const [recipe, setRecipe] = useState([]);
   const [measures, setMeasures] = useState([]);
+  const [recommendations, setRecommendations] = useState([]);
 
   useEffect(() => {
     const fetch = async () => {
       const { meals } = await fetchByID(id, 'Meals');
       setRecipe(meals[0]);
+    };
+    fetch();
+  }, []);
+
+  useEffect(() => {
+    const fetch = async () => {
+      const { drinks } = await fetchByIngredients('Drinks');
+      setRecommendations(drinks);
     };
     fetch();
   }, []);
@@ -61,13 +72,21 @@ export default function DrinkDetail({ id }) {
       </fieldset>
       <iframe
         data-testid="video"
-        src={ recipe?.strYoutube?.replace('watch', 'embed') }
+        src={ recipe?.strYoutube?.replace('watch?v=', 'embed/') }
         title="video"
         width="420"
         height="315"
       >
         Youtube Video
       </iframe>
+      {
+        recommendations.length > 0 && (
+          <Recommendations
+            recommendations={ recommendations }
+            title="Drinks"
+          />
+        )
+      }
     </div>
   );
 }
