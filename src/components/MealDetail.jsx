@@ -3,11 +3,16 @@ import propTypes from 'prop-types';
 
 import { fetchByID, fetchByIngredients } from '../services/API';
 
-import { saveFavoriteRecipes } from '../services/localStorage';
+import {
+  saveFavoriteRecipes,
+  getFavoriteRecipes,
+  delFavoriteRecipes,
+} from '../services/localStorage';
 
 import Recommendations from './Recommendations';
 
 import blackHeartIcon from '../images/blackHeartIcon.svg';
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import shareIcon from '../images/shareIcon.svg';
 
 const copy = require('clipboard-copy');
@@ -18,6 +23,7 @@ export default function DrinkDetail({ id, match }) {
   const [measures, setMeasures] = useState([]);
   const [recommendations, setRecommendations] = useState([]);
   const [shareRecipe, setShareRecipe] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
 
   const { url } = match;
 
@@ -38,15 +44,30 @@ export default function DrinkDetail({ id, match }) {
   }, []);
 
   useEffect(() => {
+    const favoriteList = getFavoriteRecipes();
+    if (favoriteList) {
+      setIsFavorite(favoriteList.some((e) => e.id === id));
+    }
+  }, [isFavorite]);
+
+  useEffect(() => {
     const ingredientFirst = Object.keys(recipe).indexOf('strIngredient1');
     const ingredientLast = Object.keys(recipe).indexOf('strIngredient15');
     const measureFirst = Object.keys(recipe).indexOf('strMeasure1');
     const measureLast = Object.keys(recipe).indexOf('strMeasure15');
 
-    const ingredientValues = Object.values(recipe).slice(ingredientFirst, ingredientLast);
-    const measureValues = Object.values(recipe).slice(measureFirst, measureLast);
+    const ingredientValues = Object.values(recipe).slice(
+      ingredientFirst,
+      ingredientLast,
+    );
+    const measureValues = Object.values(recipe).slice(
+      measureFirst,
+      measureLast,
+    );
 
-    setIngredients(ingredientValues.filter((ingredient) => ingredient !== null));
+    setIngredients(
+      ingredientValues.filter((ingredient) => ingredient !== null),
+    );
     setMeasures(measureValues.filter((measure) => measure !== null));
   }, [recipe]);
 
@@ -58,16 +79,21 @@ export default function DrinkDetail({ id, match }) {
   };
 
   const handleFavorites = () => {
-    const favorite = {
-      id: recipe.idMeal,
-      type: 'meal',
-      nationality: recipe.strArea,
-      category: recipe.strCategory,
-      alcoholicOrNot: '',
-      name: recipe.strMeal,
-      image: recipe.strMealThumb,
-    };
-    saveFavoriteRecipes(favorite);
+    if (isFavorite) {
+      delFavoriteRecipes(id);
+    } else {
+      const favorite = {
+        id: recipe.idMeal,
+        type: 'meal',
+        nationality: recipe.strArea,
+        category: recipe.strCategory,
+        alcoholicOrNot: '',
+        name: recipe.strMeal,
+        image: recipe.strMealThumb,
+      };
+      saveFavoriteRecipes(favorite);
+    }
+    setIsFavorite(!isFavorite);
   };
 
   return (
@@ -75,7 +101,7 @@ export default function DrinkDetail({ id, match }) {
       <input
         type="image"
         data-testid="favorite-btn"
-        src={ blackHeartIcon }
+        src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
         alt="heart icon"
         onClick={ handleFavorites }
       />
@@ -86,34 +112,25 @@ export default function DrinkDetail({ id, match }) {
         alt="share icon"
         onClick={ handleShare }
       />
-      {
-        shareRecipe && <p>Link copied!</p>
-      }
+      {shareRecipe && <p>Link copied!</p>}
       <img
         data-testid="recipe-photo"
         src={ recipe?.strMealThumb }
         alt={ recipe?.strMeal }
       />
-      <h1 data-testid="recipe-title">{ recipe?.strMeal }</h1>
+      <h1 data-testid="recipe-title">{recipe?.strMeal}</h1>
       <h2 data-testid="recipe-category">
-        {
-          `${recipe?.strCategory} ${isAlcoholic}`
-        }
+        {`${recipe?.strCategory} ${isAlcoholic}`}
       </h2>
       <ul>
         {ingredients.map((ingredient, index) => (
-          <li
-            data-testid={ `${index}-ingredient-name-and-measure` }
-            key={ index }
-          >
+          <li data-testid={ `${index}-ingredient-name-and-measure` } key={ index }>
             {`${ingredient} - ${measures[index]}`}
           </li>
         ))}
       </ul>
       <fieldset>
-        <p data-testid="instructions">
-          { recipe?.strInstructions }
-        </p>
+        <p data-testid="instructions">{recipe?.strInstructions}</p>
       </fieldset>
       <iframe
         data-testid="video"
@@ -124,14 +141,9 @@ export default function DrinkDetail({ id, match }) {
       >
         Youtube Video
       </iframe>
-      {
-        recommendations.length > 0 && (
-          <Recommendations
-            recommendations={ recommendations }
-            title="Drinks"
-          />
-        )
-      }
+      {recommendations.length > 0 && (
+        <Recommendations recommendations={ recommendations } title="Drinks" />
+      )}
     </div>
   );
 }

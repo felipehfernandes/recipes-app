@@ -33,14 +33,23 @@ const saveInProgressRecipes = () => {
 const saveFavoriteRecipes = (favorite) => {
   if (JSON.parse(localStorage.getItem('favoriteRecipes'))) {
     const savedFavoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    console.log(savedFavoriteRecipes);
     localStorage.setItem('favoriteRecipes', JSON.stringify(
       [...savedFavoriteRecipes, favorite],
     ));
   } else {
-    console.log(favorite);
     localStorage.setItem('favoriteRecipes', JSON.stringify([favorite]));
   }
+};
+
+const getFavoriteRecipes = () => {
+  const favoriteList = JSON.parse(localStorage.getItem('favoriteRecipes'));
+  return favoriteList;
+};
+
+const delFavoriteRecipes = (id) => {
+  const favoriteList = JSON.parse(localStorage.getItem('favoriteRecipes'));
+  const newFavoriteList = favoriteList.filter((e) => e.id !== id);
+  localStorage.setItem('favoriteRecipes', JSON.stringify(newFavoriteList));
 };
 
 export {
@@ -50,4 +59,6 @@ export {
   saveDoneRecipes,
   saveInProgressRecipes,
   saveFavoriteRecipes,
+  getFavoriteRecipes,
+  delFavoriteRecipes,
 };
