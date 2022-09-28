@@ -30,10 +30,35 @@ const saveInProgressRecipes = () => {
   return inProgressRecipes;
 };
 
+const saveFavoriteRecipes = (favorite) => {
+  if (JSON.parse(localStorage.getItem('favoriteRecipes'))) {
+    const savedFavoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    localStorage.setItem('favoriteRecipes', JSON.stringify(
+      [...savedFavoriteRecipes, favorite],
+    ));
+  } else {
+    localStorage.setItem('favoriteRecipes', JSON.stringify([favorite]));
+  }
+};
+
+const getFavoriteRecipes = () => {
+  const favoriteList = JSON.parse(localStorage.getItem('favoriteRecipes'));
+  return favoriteList;
+};
+
+const delFavoriteRecipes = (id) => {
+  const favoriteList = JSON.parse(localStorage.getItem('favoriteRecipes'));
+  const newFavoriteList = favoriteList.filter((e) => e.id !== id);
+  localStorage.setItem('favoriteRecipes', JSON.stringify(newFavoriteList));
+};
+
 export {
   saveEmail,
   saveMealsToken,
   saveDrinksToken,
   saveDoneRecipes,
   saveInProgressRecipes,
+  saveFavoriteRecipes,
+  getFavoriteRecipes,
+  delFavoriteRecipes,
 };

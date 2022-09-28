@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import propTypes from 'prop-types';
 
 import { saveDoneRecipes, saveInProgressRecipes } from '../services/localStorage';
@@ -13,6 +14,7 @@ export default function RecipeDetails({ match }) {
   const [inProgressRecipe, setInProgressRecipe] = useState(false);
 
   const { params: { id }, url } = match;
+  const history = useHistory();
 
   useEffect(() => {
     const getDoneRecipes = saveDoneRecipes('doneRecipes');
@@ -28,10 +30,21 @@ export default function RecipeDetails({ match }) {
     }
   }, []);
 
+  const handleClick = () => {
+    if (url.includes('meals')) {
+      history.push(`/meals/${id}/in-progress`);
+      console.log('entou no if');
+    } else {
+      history.push(`/drinks/${id}/in-progress`);
+    }
+  };
+
   return (
     <div>
       {
-        (url.includes('meals')) ? <MealDetail id={ id } /> : <DrinkDetail id={ id } />
+        (url.includes('meals'))
+          ? <MealDetail id={ id } match={ match } />
+          : <DrinkDetail id={ id } match={ match } />
       }
       {
         !doneRecipe && (
@@ -39,6 +52,7 @@ export default function RecipeDetails({ match }) {
             type="button"
             data-testid="start-recipe-btn"
             className="start-recipe-btn"
+            onClick={ handleClick }
           >
             {
               (inProgressRecipe) ? 'Continue Recipe' : 'Start Recipe'
