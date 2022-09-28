@@ -3,13 +3,23 @@ import propTypes from 'prop-types';
 
 import { fetchByID, fetchByIngredients } from '../services/API';
 
+import { saveFavoriteRecipes } from '../services/localStorage';
+
 import Recommendations from './Recommendations';
 
-export default function DrinkDetail({ id }) {
+import blackHeartIcon from '../images/blackHeartIcon.svg';
+import shareIcon from '../images/shareIcon.svg';
+
+const copy = require('clipboard-copy');
+
+export default function DrinkDetail({ id, match }) {
   const [ingredients, setIngredients] = useState([]);
   const [recipe, setRecipe] = useState([]);
   const [measures, setMeasures] = useState([]);
   const [recommendations, setRecommendations] = useState([]);
+  const [shareRecipe, setShareRecipe] = useState(false);
+
+  const { url } = match;
 
   useEffect(() => {
     const fetch = async () => {
@@ -42,8 +52,43 @@ export default function DrinkDetail({ id }) {
 
   const isAlcoholic = recipe?.strAlcoholic === 'Alcoholic' ? '- Alcoholic' : '';
 
+  const handleShare = () => {
+    copy(`http://localhost:3000${url}`);
+    setShareRecipe(true);
+  };
+
+  const handleFavorites = () => {
+    const favorite = {
+      id: recipe.idMeal,
+      type: 'meal',
+      nationality: recipe.strArea,
+      category: recipe.strCategory,
+      alcoholicOrNot: '',
+      name: recipe.strMeal,
+      image: recipe.strMealThumb,
+    };
+    saveFavoriteRecipes(favorite);
+  };
+
   return (
     <div>
+      <input
+        type="image"
+        data-testid="favorite-btn"
+        src={ blackHeartIcon }
+        alt="heart icon"
+        onClick={ handleFavorites }
+      />
+      <input
+        type="image"
+        data-testid="share-btn"
+        src={ shareIcon }
+        alt="share icon"
+        onClick={ handleShare }
+      />
+      {
+        shareRecipe && <p>Link copied!</p>
+      }
       <img
         data-testid="recipe-photo"
         src={ recipe?.strMealThumb }
@@ -93,4 +138,5 @@ export default function DrinkDetail({ id }) {
 
 DrinkDetail.propTypes = {
   id: propTypes.string.isRequired,
+  match: propTypes.shape().isRequired,
 };

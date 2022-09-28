@@ -7,17 +7,11 @@ import { saveDoneRecipes, saveInProgressRecipes } from '../services/localStorage
 import MealDetail from '../components/MealDetail';
 import DrinkDetail from '../components/DrinkDetail';
 
-import blackHeartIcon from '../images/blackHeartIcon.svg';
-import shareIcon from '../images/shareIcon.svg';
-
 import '../styles/recipeDetails.css';
-
-const copy = require('clipboard-copy');
 
 export default function RecipeDetails({ match }) {
   const [doneRecipe, setDoneRecipe] = useState(false);
   const [inProgressRecipe, setInProgressRecipe] = useState(false);
-  const [shareRecipe, setShareRecipe] = useState(false);
 
   const { params: { id }, url } = match;
   const history = useHistory();
@@ -45,31 +39,12 @@ export default function RecipeDetails({ match }) {
     }
   };
 
-  const handleShare = () => {
-    copy(`http://localhost:3000${url}`);
-    setShareRecipe(true);
-  };
-
   return (
     <div>
-      <input
-        type="image"
-        data-testid="favorite-btn"
-        src={ blackHeartIcon }
-        alt="heart icon"
-      />
-      <input
-        type="image"
-        data-testid="share-btn"
-        src={ shareIcon }
-        alt="share icon"
-        onClick={ handleShare }
-      />
       {
-        shareRecipe && <p>Link copied!</p>
-      }
-      {
-        (url.includes('meals')) ? <MealDetail id={ id } /> : <DrinkDetail id={ id } />
+        (url.includes('meals'))
+          ? <MealDetail id={ id } match={ match } />
+          : <DrinkDetail id={ id } match={ match } />
       }
       {
         !doneRecipe && (

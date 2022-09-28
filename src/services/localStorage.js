@@ -30,10 +30,24 @@ const saveInProgressRecipes = () => {
   return inProgressRecipes;
 };
 
+const saveFavoriteRecipes = (favorite) => {
+  if (JSON.parse(localStorage.getItem('favoriteRecipes'))) {
+    const savedFavoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    console.log(savedFavoriteRecipes);
+    localStorage.setItem('favoriteRecipes', JSON.stringify(
+      [...savedFavoriteRecipes, favorite],
+    ));
+  } else {
+    console.log(favorite);
+    localStorage.setItem('favoriteRecipes', JSON.stringify([favorite]));
+  }
+};
+
 export {
   saveEmail,
   saveMealsToken,
   saveDrinksToken,
   saveDoneRecipes,
   saveInProgressRecipes,
+  saveFavoriteRecipes,
 };
