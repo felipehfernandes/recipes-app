@@ -7,6 +7,9 @@ import { saveDoneRecipes, saveInProgressRecipes } from '../services/localStorage
 import MealDetail from '../components/MealDetail';
 import DrinkDetail from '../components/DrinkDetail';
 
+import blackHeartIcon from '../images/blackHeartIcon.svg';
+import shareIcon from '../images/shareIcon.svg';
+
 import '../styles/recipeDetails.css';
 
 export default function RecipeDetails({ match }) {
@@ -41,6 +44,18 @@ export default function RecipeDetails({ match }) {
 
   return (
     <div>
+      <input
+        type="image"
+        data-testid="favorite-btn"
+        src={ blackHeartIcon }
+        alt="heart icon"
+      />
+      <input
+        type="image"
+        data-testid="share-btn"
+        src={ shareIcon }
+        alt="share icon"
+      />
       {
         (url.includes('meals')) ? <MealDetail id={ id } /> : <DrinkDetail id={ id } />
       }
