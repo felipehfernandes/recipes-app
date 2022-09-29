@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 
 import { saveDoneRecipes } from '../services/localStorage';
 
 import Header from '../components/Header';
+import DrinkDoneCard from '../components/DrinkDoneCard';
+import MealDoneCard from '../components/MealDoneCard';
 
-import shareIcon from '../images/shareIcon.svg';
+import mockRecipes from '../tests/helpers/mockForDoneRecipes';
 
 export default function Complete() {
   const [doneRecipes, setDoneRecipes] = useState([]);
-  const [doneMeals, setDoneMeals] = useState([]);
+  const [doneMeals, setDoneMeals] = useState(mockRecipes);
   const [doneDrinks, setDoneDrinks] = useState([]);
   const [isShowing, setIsShowing] = useState([]);
 
@@ -24,13 +25,21 @@ export default function Complete() {
     );
     setDoneMeals(doneMealsRecipes);
 
-    const doneMDrinksRecipes = allDoneRecipes.filter(
-      (recipe) => recipe.type === 'drinks',
+    const doneDrinksRecipes = allDoneRecipes.filter(
+      (recipe) => recipe.type === 'drink',
     );
-    setDoneDrinks(doneMDrinksRecipes);
+    setDoneDrinks(doneDrinksRecipes);
   }, []);
 
-  const handleClick = (type) => setIsShowing(type);
+  const handleClick = (type) => {
+    if (type === 'meal') {
+      setIsShowing(doneMeals);
+    } else if (type === 'drink') {
+      setIsShowing(doneDrinks);
+    } else {
+      setIsShowing(doneRecipes);
+    }
+  };
 
   return (
     <div>
@@ -39,7 +48,8 @@ export default function Complete() {
         <button
           type="button"
           data-testid="filter-by-all-btn"
-          value={ doneRecipes }
+          // value={ doneRecipes }
+          value="All"
           onClick={ ({ target: { value } }) => handleClick(value) }
         >
           All
@@ -47,7 +57,8 @@ export default function Complete() {
         <button
           type="button"
           data-testid="filter-by-meal-btn"
-          value={ doneMeals }
+          // value={ doneMeals }
+          value="meal"
           onClick={ ({ target: { value } }) => handleClick(value) }
         >
           Meals
@@ -55,55 +66,32 @@ export default function Complete() {
         <button
           type="button"
           data-testid="filter-by-drink-btn"
-          value={ doneDrinks }
+          // value={ doneDrinks }
+          value="drink"
           onClick={ ({ target: { value } }) => handleClick(value) }
         >
           Drinks
         </button>
         <ul>
           {
-            isShowing.map((recipeItem, index) => (
-              <li key={ recipeItem.id }>
-                <Link to={ `/${recipeItem.type}s/${recipeItem.id}` }>
-                  <img
-                    data-testid={ `${index}-horizontal-image` }
-                    src={ recipeItem.image }
-                    alt={ recipeItem.name }
+            isShowing.map((recipeItem, index) => {
+              if (recipeItem?.type === 'meal') {
+                return (
+                  <MealDoneCard
+                    key={ index }
+                    item={ recipeItem }
+                    index={ index }
                   />
-                  <h3 data-testid={ `${index}-horizontal-name` }>
-                    { recipeItem.name }
-                  </h3>
-                  <h4 data-testid={ `${index}-horizontal-top-text` }>
-                    { recipeItem.category }
-                  </h4>
-                  <h5 data-testid={ `${index}-horizontal-done-date` }>
-                    { recipeItem.doneDate }
-                  </h5>
-                </Link>
-                <input
-                  type="image"
-                  data-testid={ `${index}-horizontal-share-btn` }
-                  src={ shareIcon }
-                  alt="share"
+                );
+              }
+              return (
+                <DrinkDoneCard
+                  key={ index }
+                  item={ recipeItem }
+                  index={ index }
                 />
-                {
-                  recipeItem.tags.length > 0 && (
-                    <ul>
-                      {
-                        recipeItem.tags.map((tag, indexTag) => (
-                          <li
-                            key={ indexTag }
-                            data-testid={ `${index}-${tag}-horizontal-tag` }
-                          >
-                            { tag }
-                          </li>
-                        ))
-                      }
-                    </ul>
-                  )
-                }
-              </li>
-            ))
+              );
+            })
           }
         </ul>
       </div>
