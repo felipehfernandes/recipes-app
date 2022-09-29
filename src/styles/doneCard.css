@@ -1,3 +1,5 @@
 .recipe-image {
-    position: fixed;
+    /* position: fixed; */
+    width: 200;
+    height: 200px;
 }

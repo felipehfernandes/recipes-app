@@ -8,6 +8,8 @@ import MealDoneCard from '../components/MealDoneCard';
 
 import mockRecipes from '../tests/helpers/mockForDoneRecipes';
 
+import '../styles/doneCard.css';
+
 export default function Complete() {
   const [doneRecipes, setDoneRecipes] = useState([]);
   const [doneMeals, setDoneMeals] = useState(mockRecipes);
