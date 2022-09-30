@@ -22,6 +22,7 @@ export default function MealFavoriteCard({ item, index }) {
           data-testid={ `${index}-horizontal-image` }
           src={ image }
           alt={ name }
+          className="recipe-image"
         />
         <h3 data-testid={ `${index}-horizontal-name` }>
           { name }

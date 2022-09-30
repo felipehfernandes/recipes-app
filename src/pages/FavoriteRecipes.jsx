@@ -5,7 +5,9 @@ import MealFavoriteCard from '../components/MealFavoriteCard';
 import DrinkFavoriteCard from '../components/DrinkFavoriteCard';
 import Buttons from '../components/Buttons';
 
-import { saveDoneRecipes, delFavoriteRecipes } from '../services/localStorage';
+import { saveDoneRecipes, deleteFavoriteRecipes } from '../services/localStorage';
+
+import '../styles/doneCard.css';
 
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 
@@ -45,7 +47,7 @@ function RecipesFavorite() {
   };
 
   const handleRemove = ({ target: { value } }) => {
-    delFavoriteRecipes('favoriteRecipes', value);
+    deleteFavoriteRecipes('favoriteRecipes', value);
     setFavoriteRemove(true);
   };
 
