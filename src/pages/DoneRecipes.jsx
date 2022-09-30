@@ -34,10 +34,10 @@ export default function Complete() {
     setDoneDrinks(doneDrinksRecipes);
   }, []);
 
-  const handleClick = (type) => {
-    if (type === 'meal') {
+  const handleClick = ({ target: { value } }) => {
+    if (value === 'meal') {
       setIsShowing(doneMeals);
-    } else if (type === 'drink') {
+    } else if (value === 'drink') {
       setIsShowing(doneDrinks);
     } else {
       setIsShowing(doneRecipes);
