@@ -36,18 +36,26 @@ describe('Testa a página de Perfil', () => {
 
     const email = screen.getByText(emailTest);
     const profileFavButton = screen.getByTestId('profile-favorite-btn');
-    const profileTopButton = screen.getByTestId('profile-top-btn');
-    const profileLogoutButton = screen.getByTestId('profile-logout-btn');
 
     expect(email).toBeInTheDocument();
 
     userEvent.click(profileFavButton);
 
     expect(history.location.pathname).toBe('/favorite-recipes');
+  });
+  test('Se redireciona para Home', () => {
+    jest.spyOn(localStorage, 'saveOnIt');
+    localStorage.saveOnIt('user', { email: emailTest });
 
-    userEvent.click(profileTopButton);
+    const { history } = renderWithRouter(path);
+
+    const email = screen.getByText(emailTest);
+    const profileLogoutButton = screen.getByTestId('profile-logout-btn');
+
+    expect(email).toBeInTheDocument();
+
     userEvent.click(profileLogoutButton);
 
-    expect(history.location.pathname).toBe('/favorite-recipes');
+    expect(history.location.pathname).toBe('/');
   });
 });
