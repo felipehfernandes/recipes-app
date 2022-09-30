@@ -5,6 +5,7 @@ import { saveDoneRecipes } from '../services/localStorage';
 import Header from '../components/Header';
 import DrinkDoneCard from '../components/DrinkDoneCard';
 import MealDoneCard from '../components/MealDoneCard';
+import Buttons from '../components/Buttons';
 
 import mockRecipes from '../tests/helpers/mockForDoneRecipes';
 
@@ -47,33 +48,7 @@ export default function Complete() {
     <div>
       <Header title="Done Recipes" />
       <div>
-        <button
-          type="button"
-          data-testid="filter-by-all-btn"
-          // value={ doneRecipes }
-          value="All"
-          onClick={ ({ target: { value } }) => handleClick(value) }
-        >
-          All
-        </button>
-        <button
-          type="button"
-          data-testid="filter-by-meal-btn"
-          // value={ doneMeals }
-          value="meal"
-          onClick={ ({ target: { value } }) => handleClick(value) }
-        >
-          Meals
-        </button>
-        <button
-          type="button"
-          data-testid="filter-by-drink-btn"
-          // value={ doneDrinks }
-          value="drink"
-          onClick={ ({ target: { value } }) => handleClick(value) }
-        >
-          Drinks
-        </button>
+        <Buttons handleClick={ handleClick } />
         <ul>
           {
             isShowing.map((recipeItem, index) => {

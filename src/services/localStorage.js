@@ -52,6 +52,12 @@ const delFavoriteRecipes = (id) => {
   localStorage.setItem('favoriteRecipes', JSON.stringify(newFavoriteList));
 };
 
+const deleteFavoriteRecipes = (key, id) => {
+  const getByKey = readSpecificKey(key);
+  const newByKey = getByKey.filter((e) => e.id !== id);
+  localStorage.setItem(key, JSON.stringify(newByKey));
+};
+
 export {
   saveEmail,
   saveMealsToken,
@@ -61,4 +67,5 @@ export {
   saveFavoriteRecipes,
   getFavoriteRecipes,
   delFavoriteRecipes,
+  deleteFavoriteRecipes,
 };
