@@ -37,3 +37,48 @@ describe('Testa a página de Receitas Feitas', () => {
     expect(textOne).toBeInTheDocument();
   });
 });
+describe('Testa os botões de filtros estão funcionando corretamente', () => {
+  test('Botão de filtro Meals', () => {
+    localStorage.saveDoneRecipes = jest.fn().mockReturnValue(doneMock);
+    window.document.execCommand = jest.fn().mockImplementation(() => 'copied');
+
+    renderWithRouter(path);
+
+    const imageOne = screen.getByTestId('1-horizontal-image');
+
+    expect(imageOne).toBeInTheDocument();
+
+    const mealButton = screen.getByRole('button', { name: 'Meal' });
+    userEvent.click(mealButton);
+
+    expect(imageOne).not.toBeInTheDocument();
+
+    const shareButton = screen.getByTestId('0-horizontal-share-btn');
+    userEvent.click(shareButton);
+    expect(screen.getByText('Link copied!')).toBeInTheDocument();
+  });
+  test('Botão de filtro Drinks depois o botão All', () => {
+    localStorage.saveDoneRecipes = jest.fn().mockReturnValue(doneMock);
+    window.document.execCommand = jest.fn().mockImplementation(() => 'copied');
+
+    renderWithRouter(path);
+
+    const textOne = screen.getByTestId('0-horizontal-name');
+
+    expect(textOne).toBeInTheDocument();
+
+    const drinksButton = screen.getByRole('button', { name: 'Drinks' });
+    userEvent.click(drinksButton);
+
+    expect(textOne).not.toBeInTheDocument();
+
+    const shareButton = screen.getByTestId('0-horizontal-share-btn');
+    userEvent.click(shareButton);
+    expect(screen.getByText('Link copied!')).toBeInTheDocument();
+
+    const allButton = screen.getByRole('button', { name: 'All' });
+    userEvent.click(allButton);
+
+    expect(textOne).not.toBeInTheDocument();
+  });
+});
