@@ -12,7 +12,7 @@ export default function MealFavoriteCard({ item, index }) {
   const { id, image, name, category, nationality } = item;
 
   const handleCopy = () => {
-    copy(`http://localhost:3000/drinks/${id}`);
+    copy(`http://localhost:3000/meals/${id}`);
     setIsCopied(true);
   };
   return (
