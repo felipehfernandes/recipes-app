@@ -1,11 +1,11 @@
 import React from 'react';
-import userEvent from '@testing-library/user-event';
 import { screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import renderWithRouter from './helpers/renderWithRouter';
 import App from '../App';
 
 describe('Teste da tela de login', () => {
-  test('Se o botão e habilitado ao digitar email e senha corretamente', () => {
+  test('Se o botão é habilitado ao digitar email e senha corretamente', () => {
     renderWithRouter(<App />);
 
     const emailInput = screen.getByTestId('email-input');
@@ -18,7 +18,7 @@ describe('Teste da tela de login', () => {
     expect(loginButton).toBeEnabled();
   });
 
-  test('Se ao clicar no botão é redirecionado para tela principal de receitas de comidas', () => {
+  test('Se ao clicar no botão é redirecionado para a tela principal de receitas de comidas', () => {
     const { history } = renderWithRouter(<App />);
 
     const emailInput = screen.getByTestId('email-input');
