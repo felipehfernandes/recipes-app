@@ -21,13 +21,17 @@ const saveDoneRecipes = (key) => {
   return doneRecipes;
 };
 
-const saveInProgressRecipes = () => {
+const saveInProgressRecipes = (recipes) => {
+  localStorage.setItem('inProgressRecipes', JSON.stringify(recipes));
+  const inProgressRecipes = readSpecificKey('inProgressRecipes');
+  return inProgressRecipes;
+};
+
+const getInProgressRecipes = () => {
   if (!JSON.parse(localStorage.getItem('inProgressRecipes'))) {
     localStorage.setItem('inProgressRecipes', JSON.stringify({ meals: {}, drinks: {} }));
   }
-
-  const inProgressRecipes = readSpecificKey('inProgressRecipes');
-  return inProgressRecipes;
+  return readSpecificKey('inProgressRecipes');
 };
 
 const saveFavoriteRecipes = (favorite) => {
@@ -61,4 +65,5 @@ export {
   saveFavoriteRecipes,
   getFavoriteRecipes,
   delFavoriteRecipes,
+  getInProgressRecipes,
 };

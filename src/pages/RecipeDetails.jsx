@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import propTypes from 'prop-types';
 
-import { saveDoneRecipes, saveInProgressRecipes } from '../services/localStorage';
+import { saveDoneRecipes, getInProgressRecipes } from '../services/localStorage';
 
 import MealDetail from '../components/MealDetail';
 import DrinkDetail from '../components/DrinkDetail';
@@ -20,7 +20,7 @@ export default function RecipeDetails({ match }) {
     const getDoneRecipes = saveDoneRecipes('doneRecipes');
     setDoneRecipe(getDoneRecipes.some((recipe) => recipe.id === id));
 
-    const recipeInProgress = saveInProgressRecipes();
+    const recipeInProgress = getInProgressRecipes();
 
     if (recipeInProgress.drinks && Object.keys(recipeInProgress.drinks).includes(id)) {
       setInProgressRecipe(true);
@@ -33,7 +33,6 @@ export default function RecipeDetails({ match }) {
   const handleClick = () => {
     if (url.includes('meals')) {
       history.push(`/meals/${id}/in-progress`);
-      console.log('entou no if');
     } else {
       history.push(`/drinks/${id}/in-progress`);
     }
