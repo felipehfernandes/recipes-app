@@ -1,0 +1,35 @@
+.backgroundImage {
+  height: 100vh;
+  position: absolute;
+  transform: rotate(90deg);
+  z-index: 1;
+}
+
+
+.formLogin {
+  align-items: center;
+  background-color: orange;
+  border: solid black 2px;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+  padding-top: 80%;
+  position: absolute;
+  z-index: 0;
+}
+
+.inputEmail {
+  border-radius: 5px;
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+.btnSubmitLogin {
+  align-items: center;
+  border-radius: 5px;
+  justify-content: center;
+  margin-top: 20px;
+  width: 40%;
+}
+
