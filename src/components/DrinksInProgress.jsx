@@ -118,7 +118,7 @@ export default function DrinkDetail({ id }) {
   };
 
   return (
-    <div>
+    <div className="recipe-detail">
       <input
         type="image"
         data-testid="favorite-btn"
@@ -132,6 +132,7 @@ export default function DrinkDetail({ id }) {
         src={ shareIcon }
         alt="share icon"
         onClick={ handleShare }
+        className="share-btn"
       />
       {shareRecipe && <p>Link copied!</p>}
       <h1 data-testid="recipe-title">{recipe?.strDrink}</h1>
@@ -139,6 +140,7 @@ export default function DrinkDetail({ id }) {
         data-testid="recipe-photo"
         src={ recipe?.strDrinkThumb }
         alt={ recipe?.strDrink }
+        className="img-recipe-detail"
       />
       {ingredients.map((ingredient, index) => (
         <label
@@ -152,19 +154,20 @@ export default function DrinkDetail({ id }) {
             name={ `${ingredient} - ${measures[index]}` }
             onClick={ setCheckbox }
           />
-          {`${ingredient} - ${measures[index]}`}
+          <span className="checkbox">{`${ingredient} - ${measures[index]}`}</span>
         </label>
       ))}
       <h2 data-testid="recipe-category">
         {`${recipe?.strCategory} ${isAlcoholic}`}
       </h2>
-      <fieldset>
+      <fieldset className="recipe-instructions">
         <p data-testid="instructions">{recipe?.strInstructions}</p>
       </fieldset>
       <Link to="/done-recipes">
         <button
           data-testid="finish-recipe-btn"
           type="button"
+          className="start-recipe-btn"
         >
           Finalizar Receita
         </button>

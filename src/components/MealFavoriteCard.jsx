@@ -16,7 +16,7 @@ export default function MealFavoriteCard({ item, index }) {
     setIsCopied(true);
   };
   return (
-    <div>
+    <div className="recipe-detail">
       <Link to={ `/meals/${id}` }>
         <img
           data-testid={ `${index}-horizontal-image` }

@@ -98,40 +98,44 @@ export default function DrinkDetail({ id, match }) {
 
   return (
     <div>
-      <input
-        type="image"
-        data-testid="favorite-btn"
-        src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
-        alt="heart icon"
-        onClick={ handleFavorites }
-      />
-      <input
-        type="image"
-        data-testid="share-btn"
-        src={ shareIcon }
-        alt="share icon"
-        onClick={ handleShare }
-      />
-      {shareRecipe && <p>Link copied!</p>}
-      <img
-        data-testid="recipe-photo"
-        src={ recipe?.strMealThumb }
-        alt={ recipe?.strMeal }
-      />
-      <h1 data-testid="recipe-title">{recipe?.strMeal}</h1>
-      <h2 data-testid="recipe-category">
-        {`${recipe?.strCategory} ${isAlcoholic}`}
-      </h2>
-      <ul>
-        {ingredients.map((ingredient, index) => (
-          <li data-testid={ `${index}-ingredient-name-and-measure` } key={ index }>
-            {`${ingredient} - ${measures[index]}`}
-          </li>
-        ))}
-      </ul>
-      <fieldset>
-        <p data-testid="instructions">{recipe?.strInstructions}</p>
-      </fieldset>
+      <div className="recipe-detail">
+        <input
+          type="image"
+          data-testid="favorite-btn"
+          src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
+          alt="heart icon"
+          onClick={ handleFavorites }
+        />
+        <input
+          type="image"
+          data-testid="share-btn"
+          src={ shareIcon }
+          alt="share icon"
+          onClick={ handleShare }
+          className="share-btn"
+        />
+        {shareRecipe && <p>Link copied!</p>}
+        <img
+          data-testid="recipe-photo"
+          src={ recipe?.strMealThumb }
+          alt={ recipe?.strMeal }
+          className="img-recipe-detail"
+        />
+        <h1 data-testid="recipe-title">{recipe?.strMeal}</h1>
+        <h2 data-testid="recipe-category">
+          {`${recipe?.strCategory} ${isAlcoholic}`}
+        </h2>
+        <ul>
+          {ingredients.map((ingredient, index) => (
+            <li data-testid={ `${index}-ingredient-name-and-measure` } key={ index }>
+              {`${ingredient} - ${measures[index]}`}
+            </li>
+          ))}
+        </ul>
+        <fieldset>
+          <p data-testid="instructions">{recipe?.strInstructions}</p>
+        </fieldset>
+      </div>
       <iframe
         data-testid="video"
         src={ recipe?.strYoutube?.replace('watch?v=', 'embed/') }

@@ -15,17 +15,26 @@ function Header({ title }) {
   const handleSearch = () => setSearch((prev) => !prev);
 
   return (
-    <div>
+    <div className="header">
       <header>
         <Link to="/profile">
-          <img data-testid="profile-top-btn" src={ ProfileIcon } alt="profile" />
+          <img
+            data-testid="profile-top-btn"
+            src={ ProfileIcon }
+            alt="profile"
+            className="btn-profile"
+          />
         </Link>
         {isShowingSearchBar && (
-          <button type="button" onClick={ handleSearch }>
-            <img data-testid="search-top-btn" src={ SearchIcon } alt="search" />
+          <button type="button" onClick={ handleSearch } className="search-button">
+            <img
+              data-testid="search-top-btn"
+              src={ SearchIcon }
+              alt="search"
+            />
           </button>
         )}
-        <h1 data-testid="page-title">{ title }</h1>
+        <h1 data-testid="page-title" className="title-header">{ title }</h1>
       </header>
       {search && <SearchBar title={ title } />}
     </div>

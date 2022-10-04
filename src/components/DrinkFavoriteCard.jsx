@@ -16,12 +16,13 @@ export default function DrinkFavoriteCard({ item, index }) {
     setIsCopied(true);
   };
   return (
-    <div>
+    <div className="recipe-detail">
       <Link to={ `/drinks/${id}` }>
         <img
           data-testid={ `${index}-horizontal-image` }
           src={ image }
           alt={ name }
+          className="img-recipe-detail"
         />
         <h3 data-testid={ `${index}-horizontal-name` }>
           { name }

@@ -26,31 +26,36 @@ function Profile() {
           emailProfile
         }
       </h3>
-      <Link to="/done-recipes">
-        <button
-          type="button"
-          data-testid="profile-done-btn"
-        >
-          Done Recipes
-        </button>
-      </Link>
-      <Link to="/favorite-recipes">
-        <button
-          type="button"
-          data-testid="profile-favorite-btn"
-        >
-          Favorite Recipes
-        </button>
-      </Link>
-      <Link to="/">
-        <button
-          type="button"
-          data-testid="profile-logout-btn"
-          onClick={ clearLocalStorage }
-        >
-          Logout
-        </button>
-      </Link>
+      <div className="category-filter">
+        <Link to="/done-recipes">
+          <button
+            type="button"
+            data-testid="profile-done-btn"
+            className="btn-filter"
+          >
+            Done Recipes
+          </button>
+        </Link>
+        <Link to="/favorite-recipes">
+          <button
+            type="button"
+            data-testid="profile-favorite-btn"
+            className="btn-filter"
+          >
+            Favorite Recipes
+          </button>
+        </Link>
+        <Link to="/">
+          <button
+            type="button"
+            data-testid="profile-logout-btn"
+            onClick={ clearLocalStorage }
+            className="btn-filter"
+          >
+            Logout
+          </button>
+        </Link>
+      </div>
       <Footer title="Profile" />
     </div>
   );

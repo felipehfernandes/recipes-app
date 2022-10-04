@@ -29,6 +29,7 @@ export default function CategoryCard({ category, title }) {
       type="button"
       data-testid={ `${category.strCategory}-category-filter` }
       onClick={ isInitial ? handleFetch : handleClick }
+      className="btn-filter"
     >
       { categoryFix }
     </button>
