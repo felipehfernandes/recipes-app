@@ -97,7 +97,7 @@ export default function DrinkDetail({ id, match }) {
   };
 
   return (
-    <div>
+    <div className="recipe-detail">
       <input
         type="image"
         data-testid="favorite-btn"
@@ -111,12 +111,14 @@ export default function DrinkDetail({ id, match }) {
         src={ shareIcon }
         alt="share icon"
         onClick={ handleShare }
+        className="share-btn"
       />
       {shareRecipe && <p>Link copied!</p>}
       <img
         data-testid="recipe-photo"
         src={ recipe?.strDrinkThumb }
         alt={ recipe?.strDrink }
+        className="img-recipe-detail"
       />
       <h1 data-testid="recipe-title">{recipe?.strDrink}</h1>
       <h2 data-testid="recipe-category">

@@ -17,11 +17,12 @@ export default function Card({ recipe, index, title, type }) {
   return (
     <div>
       <Link to={ `/${title.toLowerCase()}/${id}` }>
-        <li data-testid={ titleForEachID }>
+        <li data-testid={ titleForEachID } className="li-recipe-card">
           <img
             data-testid={ `${index}-card-img` }
             src={ recipe[thumbnail] }
             alt={ recipe[str] }
+            className="img-recipe-card"
           />
           <h3 data-testid={ nameForEachID }>{recipe[str]}</h3>
         </li>

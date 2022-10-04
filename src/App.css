@@ -1,68 +1,134 @@
-.meals {
+.background-image {
+  height: 100vh;
+  margin-right: 35px;
+  position: absolute;
+  transform: rotate(90deg);
+  z-index: -1;
+}
+
+.btn-filter {
+  background-color: red;
+  border-radius: 5px;
+  font-weight: 700;
+  height: 100%;
+  margin-bottom: 5px;
+  width: 100px;
+}
+
+.btn-profile {
+  margin: 20px;
+}
+
+.btn-submit-login {
   align-items: center;
-  background: #0fa36b;
-  color: #464646;
+  border-radius: 5px;
+  justify-content: center;
+  margin-top: 20px;
+  width: 40%;
+}
+
+.btn-submit-login .label-email .label-senha .title-login {
+  position: absolute;
+}
+
+.category-filter {
+  background-color: orange;
+  border: 2px solid orange;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.checkbox {
+  display: inline-block;
+  margin: 5px;
+  margin-right: 100px;
+}
+
+.form-login {
+  align-items: center;
   display: flex;
   flex-direction: column;
-  font-family: sans-serif;
   height: 100vh;
   justify-content: center;
+  padding-top: 80%;
+  position: relative;
+}
+
+.header {
+  background-color: orange;
+  border: 2px solid orange;
+  padding-bottom: 10px;
+}
+
+.img-recipe-card {
+  width: 80%;
+}
+
+.img-recipe-detail {
   width: 100%;
 }
 
-.rocksGlass {
-  animation: shake 1s infinite ease;
-  max-height: 80vh;
+.input-email {
+  border-radius: 5px;
+  margin-left: 10px;
+  margin-top: 10px;
 }
 
-/*
-#iceLeft {
-  animation: clink .8s infinite ease;
-  opacity: 0.6;
-  transform-origin: 36px 66px;
+.li-recipe-card {
+  align-items: center;
+  background-color: rgb(253, 206, 117);
+  border: 1px solid rgb(253, 206, 117);
+  display: flex;
+  flex-direction: column;
+  list-style-type: none;
+  margin: 0;
+  padding: 10px;
 }
 
-#iceRight {
-  animation: clink .8s .2s infinite ease;
-  opacity: 0.6;
-  transform-origin: 60px 78px;
-}
-*/
-
-.meals > .logo {
-  animation: shake 1.5s infinite ease;
-  color: aliceblue;
-  font-family: Montserrat , sans-serif;
-  font-size: 3em;
-  font-weight: 900;
+.recipe-card {
+  margin-bottom: 60px;
 }
 
-@keyframes shake {
-
-  0% {
-    transform: rotate(5deg);
-  }
-
-  50% {
-    transform: rotate(-5deg);
-  }
-
-  100% {
-    transform: rotate(5deg);
-  }
+.recipe-detail {
+  background-color: rgb(253, 206, 117);
+  padding: 5px;
 }
 
-@keyframes clink {
+.recipe-instructions {
+  margin-bottom: 20px;
+}
 
-  0% {
-    transform: rotate(-10deg);
-  }
+.search {
+  display: flex;
+  margin-right: 15px;
+  margin-top: 10px;
+}
 
-  50% {
-    transform: rotate(20deg);
-  }
+.search-bar {
+  flex-grow: 1;
+  margin-left: 15px;
+}
 
-  100% {
-    transform: rotate(-10deg);
-  }
+.search-btn {
+  flex-grow: 0;
+  margin-left: 5px;
+}
+
+.search-button {
+  background-color: orange;
+  border: 0;
+}
+
+.search-select {
+  margin-left: 15px;
+}
+
+.share-btn {
+  margin-left: 10px;
+}
+
+.title-header {
+  margin: 0;
+  margin-left: 15px;
 }

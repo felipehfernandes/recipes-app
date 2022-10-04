@@ -19,7 +19,7 @@ export default function Recipes({ title }) {
   const newID = `id${title.replace('s', '')}`;
 
   return (
-    <div>
+    <div className="recipe-card">
       {
         recipes.map((recipe, index) => {
           if (index >= cardsLimitPerPage) return null;

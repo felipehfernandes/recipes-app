@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import '../styles/login.css';
-
 const minPasswordLength = 6;
 const URL = 'https://img.freepik.com/fotos-gratis/massa-de-tagliatelle-cru-perto-e-ingredientes-e-molho-de-tomate-sobre-o-plano-de-fundo-texturizado-de-madeira_23-2148195011.jpg?w=2000';
 
@@ -14,7 +12,6 @@ function Login() {
 
   const handleChange = (value, func) => func(value);
 
-  // Validando email e senha com o botão
   const validateEmail = (emailInput) => {
     const emailRegex = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i;
     return emailRegex.test(emailInput);
@@ -35,18 +32,14 @@ function Login() {
   };
 
   return (
-    <main className="mainLogin">
-      <form onSubmit={ handleSubmit } className="formLogin">
-        <img
-          src={ URL }
-          alt="background"
-          className="backgroundImage"
-        />
-        <h1>Recipes App</h1>
-        <label htmlFor="email-input" className="labelEmail">
+    <main className="main-login">
+      <form onSubmit={ handleSubmit } className="form-login">
+        <h1 className="title-login">Recipes App</h1>
+
+        <label htmlFor="email-input" className="label-email">
           E-mail
           <input
-            className="inputEmail"
+            className="input-email"
             id="email-input"
             type="email"
             data-testid="email-input"
@@ -55,10 +48,10 @@ function Login() {
           />
         </label>
 
-        <label htmlFor="password-input" className="labelSenha">
+        <label htmlFor="password-input" className="label-senha">
           Senha
           <input
-            className="inputEmail"
+            className="input-email"
             id="password-input"
             type="password"
             data-testid="password-input"
@@ -68,13 +61,19 @@ function Login() {
         </label>
 
         <button
-          className="btnSubmitLogin"
+          className="btn-submit-login"
           type="submit"
           data-testid="login-submit-btn"
           disabled={ !validateLogin() }
         >
           Enter
         </button>
+
+        <img
+          src={ URL }
+          alt="background"
+          className="background-image"
+        />
       </form>
     </main>
   );

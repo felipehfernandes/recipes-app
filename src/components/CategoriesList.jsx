@@ -20,11 +20,12 @@ export default function CategoriesList({ title }) {
   const showByPageLimit = categories.slice(0, categoriesLimitPerPage);
 
   return (
-    <div>
+    <div className="category-filter">
       <button
         type="button"
         data-testid="All-category-filter"
         onClick={ handleClick }
+        className="btn-filter"
       >
         All
       </button>
